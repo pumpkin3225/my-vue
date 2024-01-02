@@ -42,7 +42,7 @@ export default {
     <h1>Hello world!</h1>
     <label>A <input type="number" v-model="numA"></label>
     <label>B <input type="number" v-model="numB"></label>
-    <CalcButton :calc-type="calcType"/>
+    <CalcButton :calc-type="calcType" :num-A="numA" :num-B="numB"/>
     <p>-----------------------------------------</p>
     <p>-----------------------------------------</p>
     <Mybutton @click=" clac('+')">+</Mybutton>
