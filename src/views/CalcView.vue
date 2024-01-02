@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-    <h1>Hello world!</h1>
+    <h1 class="hover:text-[red] " >Hello world!</h1>
     <br>
     <label class="text-[24px]">A : <input type="number" v-model="numA" class="border-black border-[1.5px] px-1" ></label>
     <br><br>
