@@ -12,6 +12,7 @@ export default {
             default: ''
         },
     },
+    emit:['finalMath'],
     data() {
         return {
             type: this.calcType ?? [],
@@ -38,16 +39,18 @@ export default {
                 default:
                     break;
             }
+             this.$emit('finalMath',this.result);
         }
     },
 };
 </script>
 <template>
     <section id="myBtn">
-        {{ numberA }} {{ numberB }}
-        <button v-for="item in type" :key="item.id" class="btn" type="button">
-            {{ item }}
-        </button>
+        <div class=" grid gap-4 grid-cols-2 ">
+            <button v-for="item in type" :key="item.id" class="btn" type="button" @click="clac(item)">
+                {{ item }}
+            </button>
+        </div>
     </section>
 </template>
 <style scoped>

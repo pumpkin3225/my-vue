@@ -2,7 +2,7 @@
 import Mybutton from '@/components/CusButton/Mybutton.vue'
 import CalcButton from '@/components/CusButton/CalcButton.vue';
 export default {
-    components:{
+    components: {
         Mybutton,
         CalcButton,
     },
@@ -33,6 +33,9 @@ export default {
                 default:
                     break;
             }
+        },
+        print(res) {
+            this.result = res;
         }
     },
 }
@@ -40,21 +43,27 @@ export default {
 
 <template>
     <h1>Hello world!</h1>
-    <label>A <input type="number" v-model="numA"></label>
-    <label>B <input type="number" v-model="numB"></label>
-    <CalcButton :calc-type="calcType" :num-A="numA" :num-B="numB"/>
-    <p>-----------------------------------------</p>
-    <p>-----------------------------------------</p>
-    <Mybutton @click=" clac('+')">+</Mybutton>
-    <Mybutton>-</Mybutton>
-    <Mybutton>x</Mybutton>
-    <Mybutton>/</Mybutton>
-    <div>{{ result }}</div>
+    <br>
+    <label class="text-[24px]">A : <input type="number" v-model="numA" class="border-black border-[1.5px] px-1" ></label>
+    <br><br>
+    <label class="text-[24px]">B : <input type="number" v-model="numB" class="border-black border-[1.5px]  px-1" ></label>
+    <br><br>
+    <CalcButton :calc-type="calcType" :num-A="numA" :num-B="numB" @final-math="print" />
+    <br><hr class="border-black"><br>
+    <div class="flex gap-3">
+        <Mybutton @click=" clac('+')">+</Mybutton>
+        <Mybutton @click=" clac('-')">-</Mybutton>
+        <Mybutton @click=" clac('x')">x</Mybutton>
+        <Mybutton @click=" clac('/')">/</Mybutton>
+    </div>
+    <br>
+    <div class="text-[32px]">{{ result }}</div>
 </template>
 <style scoped>
 h1 {
     @apply text-3xl font-bold underline;
 }
+
 label input {
     @apply bg-[grey] border-double;
 }
