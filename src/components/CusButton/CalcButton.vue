@@ -15,8 +15,29 @@ export default {
     data() {
         return {
             type: this.calcType ?? [],
-            numberA:this.numA ?? 0,
-            numberB:this.numB ?? 0,
+            numberA: this.numA ?? 0,
+            numberB: this.numB ?? 0,
+        }
+    },
+    methods: {
+        clac(input) {
+            if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+            switch (input) {
+                case ('+'):
+                    this.result = this.numA + this.numB;
+                    break;
+                case ('-'):
+                    this.result = this.numA - this.numB;
+                    break;
+                case ('x'):
+                    this.result = this.numA * this.numB;
+                    break;
+                case ('/'):
+                    this.result = this.numA / this.numB;
+                    break;
+                default:
+                    break;
+            }
         }
     },
 };
