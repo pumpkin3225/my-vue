@@ -11,13 +11,20 @@ export default {
             type: Array,
             default: ''
         },
+        numBtn: {
+            type: Array,
+            default: ''
+        },
     },
     emit:['finalMath'],
+    emit:['eNum'],
     data() {
         return {
             type: this.calcType ?? [],
             numberA: this.numA ?? 0,
             numberB: this.numB ?? 0,
+            numBtn:this.numBtn ?? [], 
+            num:[],     
         }
     },
     methods: {
@@ -40,16 +47,23 @@ export default {
                     break;
             }
              this.$emit('finalMath',this.result);
+        },
+        addArr(str){
+           num = num.push('str');
+           this.$emit('eNum',num)
         }
     },
 };
 </script>
 <template>
     <section id="myBtn">
-        <div class=" grid gap-4 grid-cols-2 ">
-            <button v-for="item in type" :key="item.id" class="btn" type="button" @click="clac(item)">
-                {{ item }}
-            </button>
+        {{ num }}
+        <div class=" flex gap-3">
+            <button v-for="item in type" :key="item.id" class="btn" type="button" @click="clac(item)">{{ item }}</button>
+        </div>
+        <br>
+        <div class="grid gap-4 grid-cols-3" >
+            <button v-for="item in numBtn" :key="item.id" class="btn" type="button" @click="addArr(item)">{{ item }}</button>
         </div>
     </section>
 </template>
