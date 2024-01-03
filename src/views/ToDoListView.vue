@@ -17,6 +17,7 @@ export default {
         }
     },
   methods: {
+    
     addlist(){
         if(!this.addText) return
         const listId = this.todoArr.length;
@@ -30,7 +31,9 @@ export default {
         this.addText='';
         sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
     },
-    computed:{
+    removeTodo(todo){
+    this.todoArr = this.todoArr.filter(t => t !== todo)
+    sessionStorage.setItem("todoList",JSON.stringify(this.todoArr));
     },
   },
 };
@@ -48,12 +51,12 @@ export default {
     </div>
     <hr class="text-[#DFE6ED] my-2" >
     <div class="border-[gray] border-[1px] p-1 overflow-y-scroll h-[500px]">
-      <div v-for="item in todoArr" :key="item.id" class="bg-[#E9A2AD] border-[#D3455B] border-[1px] px-1 py-3 mb-2 flex justify-between ">
-        <input v-model="item.flag" type="checkbox" class="mr-[10px]">
-        <span class="mr-[10px] w-100 mr-[20px] " :class="{ 'line-through': item.flag }">{{item.todoText}}</span>
-        <span>{{item.record}}</span>
-        <span>{{item.end}}</span> 
-        <button type="button" class="text-[#D65065] bg-[white] border-[#E18190] border-[1px] rounded-md px-2 py-1">Delete</button>
+      <div v-for="todo in todoArr" :key="todo.id" class="bg-[#E9A2AD] border-[#D3455B] border-[1px] px-1 py-3 mb-2 flex justify-between ">
+        <input v-model="todo.flag" type="checkbox" class="mr-[10px]">
+        <span class="mr-[10px] w-100 mr-[20px] " :class="{ 'line-through': todo.flag }">{{todo.todoText}}</span>
+        <span>{{todo.record}}</span>
+        <span>{{todo.end}}</span> 
+        <button @click="removeTodo(todo)" type="button" class="text-[#D65065] bg-[white] border-[#E18190] border-[1px] rounded-md px-2 py-1">Delete</button>
       </div>
     </div>
     <hr>
