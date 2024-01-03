@@ -9,22 +9,21 @@ export default {
         },
         calcType: {
             type: Array,
-            default: ''
+            default: () => [],
         },
         numBtn: {
             type: Array,
-            default: ''
+            default: () => [],
         },
     },
-    emit:['finalMath'],
-    emit:['eNum'],
+    emit:['finalMath','eNum'],
     data() {
         return {
             type: this.calcType ?? [],
             numberA: this.numA ?? 0,
             numberB: this.numB ?? 0,
             numBtn:this.numBtn ?? [], 
-            num:[],     
+            num:'',     
         }
     },
     methods: {
@@ -49,8 +48,8 @@ export default {
              this.$emit('finalMath',this.result);
         },
         addArr(str){
-           num = num.push('str');
-           this.$emit('eNum',num)
+           this.num += str;
+           this.$emit('eNum',this.num);
         }
     },
 };

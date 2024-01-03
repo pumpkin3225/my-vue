@@ -50,11 +50,11 @@ export default {
 <template>
     <h1 class="hover:text-[red] " >Hello world!</h1>
     <br>
-    <label class="text-[24px]">A : <input @e-num="getNum" type="number" v-model="numA" class="border-black border-[1.5px] px-1" ></label>
+    <label class="text-[24px]">A : <input  type="number" v-model="numA" class="border-black border-[1.5px] px-1" ></label>
     <br><br>
-    <label class="text-[24px]">B : <input  @e-num="getNum" type="number" v-model="numB" class="border-black border-[1.5px]  px-1" ></label>
+    <label class="text-[24px]">B : <input  type="number" v-model="numB" class="border-black border-[1.5px]  px-1" ></label>
     <br><br>
-    <CalcButton :calc-type="calcType" :num-A="numA" :num-B="numB" :num-btn="numberBtn" @final-math="print" />
+    <CalcButton :calc-type="calcType" :num-A="numA" :num-B="numB" :num-btn="numberBtn"  @e-num="getNum" @final-math="print" />
     <br><hr class="border-black"><br>
     <div class="flex gap-3">
         <Mybutton @click=" clac('+')">+</Mybutton>
