@@ -3,19 +3,24 @@ export default {
   data() {
     return {
       addText:'',
-      todoArr: [{id:1,todoText:"好想睡覺喔",flag:false}],
       hideCompleted: false,
       record:'',
       end:'',
+      todoArr: [{id:1,todoText:"好想睡覺喔",flag:false}],
     };
   },
-   mounted() {
+  mounted() {
         if (sessionStorage.getItem('todoList')) {
             this.todoArr = JSON.parse(sessionStorage.getItem('todoList'));
         }else{
             sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
         }
     },
+  computed: {
+    hideTodos() {
+      return this.hideCompleted ? this.todoArr.filter((t) => !t.flag): this.todoArr
+    }
+  },
   methods: {
     
     addlist(){
@@ -31,10 +36,10 @@ export default {
         this.addText='';
         sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
     },
-    removeTodo(todo){
-    this.todoArr = this.todoArr.filter(t => t !== todo)
-    sessionStorage.setItem("todoList",JSON.stringify(this.todoArr));
-    },
+    removeTodo(todo) {
+    this.todoArr = this.todoArr.filter(t => t !== todo);
+    sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
+},
   },
 };
 </script>
@@ -51,7 +56,7 @@ export default {
     </div>
     <hr class="text-[#DFE6ED] my-2" >
     <div class="border-[gray] border-[1px] p-1 overflow-y-scroll h-[500px]">
-      <div v-for="todo in todoArr" :key="todo.id" class="bg-[#E9A2AD] border-[#D3455B] border-[1px] px-1 py-3 mb-2 flex justify-between ">
+      <div v-for="todo in hideTodos" :key="todo.id" class="bg-[#E9A2AD] border-[#D3455B] border-[1px] px-1 py-3 mb-2 flex justify-between ">
         <input v-model="todo.flag" type="checkbox" class="mr-[10px]">
         <span class="mr-[10px] w-100 mr-[20px] " :class="{ 'line-through': todo.flag }">{{todo.todoText}}</span>
         <span>{{todo.record}}</span>
