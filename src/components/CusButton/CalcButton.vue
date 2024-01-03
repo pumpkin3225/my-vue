@@ -9,11 +9,11 @@ export default {
         },
         calcType: {
             type: Array,
-            default: () => [],
+            default: ''
         },
         numBtn: {
             type: Array,
-            default: () => [],
+            default: ''
         },
     },
     emit:['finalMath','eNum'],
@@ -23,7 +23,7 @@ export default {
             numberA: this.numA ?? 0,
             numberB: this.numB ?? 0,
             numBtn:this.numBtn ?? [], 
-            num:'',     
+            num:[],     
         }
     },
     methods: {
@@ -48,8 +48,8 @@ export default {
              this.$emit('finalMath',this.result);
         },
         addArr(str){
-           this.num += str;
-           this.$emit('eNum',this.num);
+           this.num = this.num.push('str');
+           this.$emit('eNum',this.num)
         }
     },
 };
@@ -67,9 +67,7 @@ export default {
     </section>
 </template>
 <style scoped>
-#myBtn {
     .btn {
         @apply border-[black] border-[1px] px-[15px] py-[10px];
     }
-}
 </style>
