@@ -12,7 +12,7 @@ export default {
           todoText: "Sleep",
           flag: false,
           record: "2023-12-30",
-          end: "2024-1-1",
+          end: "2024-01-01",
           editIng: false,
           newToDo: "",
         },
