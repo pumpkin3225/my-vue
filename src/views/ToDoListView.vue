@@ -49,7 +49,6 @@ export default {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes",
-        cancelButtonText: "No",
       }).then((result) => {
         if (result.isConfirmed) {
           if (!this.addText || !this.end)
@@ -58,22 +57,22 @@ export default {
               text: "Please enter correctly",
               icon: "error",
             });
+            let time = new Date().toISOString().split("T");
+            const listId = this.todoArr.length;
+            this.todoArr.push({
+              id: listId + 1,
+              todoText: this.addText,
+              flag: false,
+              record: time[0],
+              end: this.end,
+            });
+            this.addText = "";
+            sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
+            Swal.fire({
+            title: "Sucess",
+            icon: "success",
+            });
         }
-        let time = new Date().toISOString().split("T");
-        const listId = this.todoArr.length;
-        this.todoArr.push({
-          id: listId + 1,
-          todoText: this.addText,
-          flag: false,
-          record: time[0],
-          end: this.end,
-        });
-        this.addText = "";
-        sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
-        Swal.fire({
-          title: "Sucess",
-          icon: "success",
-        });
       });
     },
     removeTodo(todo) {
@@ -85,7 +84,6 @@ export default {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "NO!"
       }).then((result) => {
         if (result.isConfirmed) {
           this.todoArr = this.todoArr.filter((t) => t !== todo);
