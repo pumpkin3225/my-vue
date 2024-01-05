@@ -57,21 +57,21 @@ export default {
               text: "Please enter correctly",
               icon: "error",
             });
-            let time = new Date().toISOString().split("T");
-            const listId = this.todoArr.length;
-            this.todoArr.push({
-              id: listId + 1,
-              todoText: this.addText,
-              flag: false,
-              record: time[0],
-              end: this.end,
-            });
-            this.addText = "";
-            this.saveList();
-            Swal.fire({
+          let time = new Date().toISOString().split("T");
+          const listId = this.todoArr.length;
+          this.todoArr.push({
+            id: listId + 1,
+            todoText: this.addText,
+            flag: false,
+            record: time[0],
+            end: this.end,
+          });
+          this.addText = "";
+          this.saveList();
+          Swal.fire({
             title: "Sucess",
             icon: "success",
-            });
+          });
         }
       });
     },
@@ -115,27 +115,16 @@ export default {
   <main class="border-[gray] border-[1px] p-4">
     <h1>Todo List</h1>
     <div class="bg-[#8DD7CF] border-[#1AAE9F] border-[1px] p-2">
-      <input
-        v-model="addText"
-        type="text"
-        class="text-[#C3CFD9] border-[gray] border-[1px] px-2 py-1 mr-[20px]"
-      />
-      <button
-        @click="addlist()"
-        type="button"
-        class="add text-[#44BDB1] bg-[white] border-[#63C8BD] border-[1px] rounded-md px-4 py-1 mb-[10px]"
-      >
+      <input v-model="addText" type="text" class="text-[#C3CFD9] border-[gray] border-[1px] px-2 py-1 mr-[20px]" />
+      <button @click="addlist()" type="button"
+        class="add text-[#44BDB1] bg-[white] border-[#63C8BD] border-[1px] rounded-md px-4 py-1 mb-[10px]">
         Add
       </button>
       <br />
-      <span>End Time : </span
-      ><input type="date" v-model="end" class="mr-[40px]" />
+      <span>End Time : </span><input type="date" v-model="end" class="mr-[40px]" />
     </div>
     <div class="w-full h-[20px] bg-[#ccc] rounded-[3px]">
-      <div
-        class="h-[100%] bg-[#4caf50] progress"
-        :style="{ width: progressBarWidth }"
-      ></div>
+      <div class="h-[100%] bg-[#4caf50] progress" :style="{ width: progressBarWidth }"></div>
     </div>
     <div class="border-[gray] border-[1px] p-1 overflow-y-scroll h-[500px]">
       <div class="w-full grid grid-cols-5 gap-4">
@@ -145,37 +134,17 @@ export default {
         <div>End</div>
         <div>Delete</div>
       </div>
-      <div
-        v-for="todo in hideTodos"
-        :key="todo.id"
-        class="w-full grid grid-cols-5 gap-4 bg-[#E9A2AD] border-[#D3455B] border-[1px] px-1 py-3 mb-2 flex justify-between h-[60px] items-center"
-      >
+      <div v-for="todo in hideTodos" :key="todo.id"
+        class="w-full grid grid-cols-5 gap-4 bg-[#E9A2AD] border-[#D3455B] border-[1px] px-1 py-3 mb-2 flex justify-between h-[60px] items-center">
         <div>
-          <input
-            v-model="todo.flag"
-            type="checkbox"
-            class="mr-[10px]"
-            @change="saveList()"
-          />
+          <input v-model="todo.flag" type="checkbox" class="mr-[10px]" @change="saveList()" />
         </div>
 
         <div>
-          <span
-            v-if="!todo.editIng"
-            @dblclick="starEdit(todo)"
-            class="mr-[10px] w-100 mr-[20px]"
-            :class="{ 'line-through': todo.flag }"
-            >{{ todo.todoText }}</span
-          >
-          <input
-            v-else
-            v-model="todo.newToDo"
-            @keydown.enter="$event.target.blur()"
-            @blur="finishEditing(todo)"
-            type="text"
-            class="mr-[10px] w-100 mr-[20px]"
-            :class="{ 'line-through': todo.flag }"
-          />
+          <span v-if="!todo.editIng" @dblclick="starEdit(todo)" class="mr-[10px] w-100 mr-[20px]"
+            :class="{ 'line-through': todo.flag }">{{ todo.todoText }}</span>
+          <input v-else v-model="todo.newToDo" @keydown.enter="$event.target.blur()" @blur="finishEditing(todo)"
+            type="text" class="mr-[10px] w-100 mr-[20px]" :class="{ 'line-through': todo.flag }" />
         </div>
 
         <div>
@@ -185,11 +154,8 @@ export default {
           <span>{{ todo.end }}</span>
         </div>
         <div>
-          <button
-            @click="removeTodo(todo)"
-            type="button"
-            class="text-[#D65065] bg-[white] border-[#E18190] border-[1px] rounded-md px-2 py-1"
-          >
+          <button @click="removeTodo(todo)" type="button"
+            class="text-[#D65065] bg-[white] border-[#E18190] border-[1px] rounded-md px-2 py-1">
             Delete
           </button>
         </div>
@@ -197,11 +163,8 @@ export default {
     </div>
     <hr />
     <div class="bg-[#8DD7CF] border-[#1AAE9F] border-[1px] p-2">
-      <button
-        @click="hideCompleted = !hideCompleted"
-        type="button"
-        class="add text-[#44BDB1] bg-[white] border-[#63C8BD] border-[1px] rounded-md px-4 py-1"
-      >
+      <button @click="hideCompleted = !hideCompleted" type="button"
+        class="add text-[#44BDB1] bg-[white] border-[#63C8BD] border-[1px] rounded-md px-4 py-1">
         {{ hideCompleted ? "Show All" : "Hide Completed" }}
       </button>
     </div>
