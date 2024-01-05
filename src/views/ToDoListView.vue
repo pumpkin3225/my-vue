@@ -24,7 +24,7 @@ export default {
     if (savedTodos) {
       this.todoArr = JSON.parse(savedTodos);
     } else {
-      sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
+      this.saveList();
     }
   },
   computed: {
@@ -67,7 +67,7 @@ export default {
               end: this.end,
             });
             this.addText = "";
-            sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
+            this.saveList();
             Swal.fire({
             title: "Sucess",
             icon: "success",
@@ -87,7 +87,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.todoArr = this.todoArr.filter((t) => t !== todo);
-          sessionStorage.setItem("todoList", JSON.stringify(this.todoArr));
+          this.saveList();
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
