@@ -124,7 +124,7 @@ export default {
       <span>End Time : </span><input type="date" v-model="end" class="mr-[40px]" />
     </div>
     <div class="w-full h-[20px] bg-[#ccc] rounded-[3px]">
-      <div class="h-[100%] bg-[#4caf50] progress" :style="{ width: progressBarWidth }"></div>
+      <div class="h-[100%] bg-[#4caf50] progress" :style="{ width: progressBarWidth }">{{ progressBarWidth }}</div>
     </div>
     <div class="border-[gray] border-[1px] p-1 overflow-y-scroll h-[500px]">
       <div class="w-full grid grid-cols-5 gap-4">
