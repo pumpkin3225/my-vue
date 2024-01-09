@@ -1,5 +1,10 @@
 <script>
+import WeatherCard from '@/components/WeatherCard.vue';
+
 export default {
+    components: {
+        WeatherCard
+    },
     data() {
         return {
             counties: [
@@ -32,7 +37,7 @@ export default {
             selectedCounty: '台灣各縣市',
             url: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-772C064A-6F46-498D-BC1C-FDC4CF8B67EA',
             locationSort: ['臺北市', '新北市', '基隆市', '新竹市', '桃園市', '新竹縣', '宜蘭縣', '臺中市', '苗栗縣', '彰化縣', '南投縣', '雲林縣', '高雄市', '臺南市', '嘉義市', '嘉義縣', '屏東縣', '花蓮縣', '臺東縣', '澎湖縣', '金門縣', '連江縣'],
-        }
+        };
     },
 
     mounted() {
@@ -56,14 +61,8 @@ export default {
                 return this.weatherData.filter(item => {
                     return selectedCounties.some(county => item.locationName.includes(county.trim()));
                 });
-            };
+            }
         },
-    },
-
-    methods: {
-        getWeatherIMG(weatherEl) {
-            return `../assets/Img/${weatherEl}.svg`;
-        }
     },
 }
 </script>
@@ -72,34 +71,54 @@ export default {
     <main class="border-[gray] border-[1px] p-4">
         <div>
             <select v-model="selectedCounty" class="w-full cursor-pointer " aria-label="Default select example">
-                <option v-for="county in counties" v-bind:value="county.area.join()">{{ county.title }}</option>
+                <option v-for="county in counties" :key="county.id" v-bind:value="county.area.join()">{{ county.title }}
+                </option>
             </select>
             <ul class=" bg-[#8DD7CF] border-[1px] p-2 text-center">
                 <li class="">
                     {{ selectedCounty }}
                 </li>
             </ul>
-            
-            <div class=" justify-content-center  flex flex-wrap  overflow-y-scroll h-[500px]">
-                <div v-for="weather in getCounty" class=" w-[50%] bg-[#E9A2AD] border-[1px] p-3 ">
-                    {{ getWeatherIMG(weather.weatherElement[0].time[0].parameter.parameterName) }}
-                    <img :src="getWeatherIMG(weather.weatherElement[0].time[0].parameter.parameterName)"
-                        class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ weather.locationName }}</h5>
-                        <p class="card-text">{{ weather.weatherElement[0].time[0].parameter.parameterName }}</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            {{ weather.weatherElement[2].time[0].parameter.parameterName }}°~{{ weather.weatherElement[4].time[0].parameter.parameterName }}°
-                        </li>
-                        <li class="list-group-item">{{ weather.weatherElement[1].time[0].parameter.parameterName }}% 降雨率</li>
-                        <li class="list-group-item">{{ weather.weatherElement[3].time[0].parameter.parameterName }}</li>
-                    </ul>
+            <div class="flex flex-wrap  overflow-y-scroll h-[500px]">
+                <div v-for="weather in getCounty" :key="weather.id" class=" w-[50%] bg-[#E9A2AD] border-[1px] p-3 flex ">
+                    <WeatherCard :weather="weather" />
                 </div>
             </div>
         </div>
     </main>
 </template>
-<style>
-</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="order-last">
+    <img :src="getWeatherIMG(weather.weatherElement[0].time[0].parameter.parameterName)" alt="">
+</div>
+<div class="w-[50%]">
+    <div>
+        <h5>{{ weather.locationName }}</h5>
+        <p>{{ weather.weatherElement[0].time[0].parameter.parameterName }}</p>
+    </div>
+    <ul>
+        <li>
+            {{ weather.weatherElement[2].time[0].parameter.parameterName }}°~{{
+                weather.weatherElement[4].time[0].parameter.parameterName }}°
+        </li>
+        <li>{{ weather.weatherElement[1].time[0].parameter.parameterName }}% 降雨率</li>
+        <li>{{ weather.weatherElement[3].time[0].parameter.parameterName }}</li>
+    </ul>
+</div> -->
