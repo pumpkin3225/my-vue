@@ -62,7 +62,7 @@ export default {
 
     methods: {
         getWeatherIMG(weatherEl) {
-            return `./img/${weatherEl}.svg`;
+            return `../assets/Img/${weatherEl}.svg`;
         }
     },
 }
@@ -79,8 +79,10 @@ export default {
                     {{ selectedCounty }}
                 </li>
             </ul>
-            <div class=" justify-content-center g-4 row overflow-y-scroll h-[500px]">
-                <div v-for="weather in getCounty" class="w-full gap-4 bg-[#E9A2AD] border-[1px] p-3  " style="width: 18rem;">
+            
+            <div class=" justify-content-center  flex flex-wrap  overflow-y-scroll h-[500px]">
+                <div v-for="weather in getCounty" class=" w-[50%] bg-[#E9A2AD] border-[1px] p-3 ">
+                    {{ getWeatherIMG(weather.weatherElement[0].time[0].parameter.parameterName) }}
                     <img :src="getWeatherIMG(weather.weatherElement[0].time[0].parameter.parameterName)"
                         class="card-img-top" alt="">
                     <div class="card-body">
@@ -95,10 +97,6 @@ export default {
                         <li class="list-group-item">{{ weather.weatherElement[3].time[0].parameter.parameterName }}</li>
                     </ul>
                 </div>
-                <div class="card mx-xl-2 invisible" style="width: 18rem;"></div>
-                <div class="card mx-xl-2 invisible" style="width: 18rem;"></div>
-                <div class="card mx-xl-2 invisible" style="width: 18rem;"></div>
-                <div class="card mx-xl-2 invisible" style="width: 18rem;"></div>
             </div>
         </div>
     </main>
