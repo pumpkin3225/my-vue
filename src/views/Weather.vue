@@ -75,12 +75,12 @@ export default {
 </script>
 
 <template>
-    <div class="flex gap-4">
-        <WeatherBtn v-for="county in counties" :key="county.title" @click="updateSelectedCounty(county.area)">
-            {{ county.title }}
-        </WeatherBtn>
-    </div>
     <main class="border-[gray] border-[1px] p-4">
+        <div class="flex gap-4 justify-between">
+            <WeatherBtn v-for="county in counties" :key="county.title" @click="updateSelectedCounty(county.area)">
+                {{ county.title }}
+            </WeatherBtn>
+        </div>
         <div>
             <select v-model="selectedCounty" class="w-full cursor-pointer " aria-label="Default select example">
                 <option v-for="county in counties" :key="county.id" :value="county.area.join()">{{ county.title }}
