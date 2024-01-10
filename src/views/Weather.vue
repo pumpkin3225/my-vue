@@ -1,9 +1,10 @@
 <script>
-import WeatherCard from '@/components/WeatherCard.vue';
-
+import WeatherCard from '@/components/CusWeather/WeatherCard.vue';
+import WeatherBtn from '@/components/CusWeather/WeatherBtn.vue';
 export default {
     components: {
-        WeatherCard
+        WeatherCard,
+        WeatherBtn,
     },
     data() {
         return {
@@ -64,14 +65,25 @@ export default {
             }
         },
     },
+
+    methods: {
+        updateSelectedCounty(selectedCounty) {
+            this.selectedCounty = selectedCounty.join(',');
+        },
+    },
 }
 </script>
 
 <template>
+    <div class="flex gap-4">
+        <WeatherBtn v-for="county in counties" :key="county.title" @click="updateSelectedCounty(county.area)">
+            {{ county.title }}
+        </WeatherBtn>
+    </div>
     <main class="border-[gray] border-[1px] p-4">
         <div>
             <select v-model="selectedCounty" class="w-full cursor-pointer " aria-label="Default select example">
-                <option v-for="county in counties" :key="county.id" v-bind:value="county.area.join()">{{ county.title }}
+                <option v-for="county in counties" :key="county.id" :value="county.area.join()">{{ county.title }}
                 </option>
             </select>
             <ul class=" bg-[#8DD7CF] border-[1px] p-2 text-center">
@@ -87,38 +99,3 @@ export default {
         </div>
     </main>
 </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="order-last">
-    <img :src="getWeatherIMG(weather.weatherElement[0].time[0].parameter.parameterName)" alt="">
-</div>
-<div class="w-[50%]">
-    <div>
-        <h5>{{ weather.locationName }}</h5>
-        <p>{{ weather.weatherElement[0].time[0].parameter.parameterName }}</p>
-    </div>
-    <ul>
-        <li>
-            {{ weather.weatherElement[2].time[0].parameter.parameterName }}°~{{
-                weather.weatherElement[4].time[0].parameter.parameterName }}°
-        </li>
-        <li>{{ weather.weatherElement[1].time[0].parameter.parameterName }}% 降雨率</li>
-        <li>{{ weather.weatherElement[3].time[0].parameter.parameterName }}</li>
-    </ul>
-</div> -->
