@@ -94,12 +94,15 @@ export default {
                     {{ selectedCounty.title }}
                 </li>
             </ul>
+           
             <div class="flex flex-wrap  overflow-y-scroll h-[500px]">
                 <div v-for="weather in filteredCounty" :key="weather.id" @keyup.enter="clearInput"
                     class=" w-[50%] bg-[#E9A2AD] border-[1px] p-3 flex ">
                     <WeatherCard :weather="weather" />
                 </div>
+                <div v-if="filteredCounty.length == 0" class="w-full text-[20px] text-center mt-[30px]">Undefined</div>
             </div>
+           
         </div>
     </main>
 </template>
