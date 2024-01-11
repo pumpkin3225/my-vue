@@ -10,8 +10,8 @@ export default {
         return {
             counties: [
                 {
-                    title: '台灣各縣市',
-                    area: ['台灣各縣市'],
+                    title: '臺灣各縣市',
+                    area: ['臺灣各縣市'],
                 },
                 {
                     title: '北部地區',
@@ -36,7 +36,7 @@ export default {
             ],
             weatherData: [],
             selectedCounty: {
-                title: '台灣各縣市',
+                title: '臺灣各縣市',
                 input: '',
             },
             url: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-772C064A-6F46-498D-BC1C-FDC4CF8B67EA',
@@ -56,7 +56,7 @@ export default {
     },
     computed: {
         filteredCounty() {
-            if (this.selectedCounty.title === '台灣各縣市') {
+            if (this.selectedCounty.title === '臺灣各縣市') {
                 return this.weatherData.filter(item => item.locationName.includes(this.selectedCounty.input));
             } else {
                 const selectedCounties = this.selectedCounty.title.split(',');
