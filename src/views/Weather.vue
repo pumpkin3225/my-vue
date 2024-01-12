@@ -61,7 +61,6 @@ export default {
             } else {
                 const selectedCounties = this.selectedCounty.title.split(',');
                 return this.weatherData.filter(item => {
-                    selectedCounties.includes(item.locationName)
                     return selectedCounties.includes(item.locationName) && item.locationName.includes(this.selectedCounty.input);
                 });
             }
